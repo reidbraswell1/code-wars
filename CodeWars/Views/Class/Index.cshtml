@@ -1,0 +1,61 @@
+@model IEnumerable<CodeWars.Shared.Class>                                                                                                                                        
+                                                                                                                                                                              
+@{                                                                                                                                                                            
+    ViewData["Title"] = "Index";                                                                                                                                              
+}                                                                                                                                                                             
+<style>                                                                                                                                                                       
+    tr:nth-child(even) {background: #CCC}                                                                                                                                     
+    tr:nth-child(odd) {background: #FFF}                                                                                                                                      
+</style>                                                                                                                                                                      
+
+<!-- Latest compiled and minified JavaScript -->
+
+<!-- (Optional) Latest compiled and minified JavaScript translation files -->
+<h2>Class Index</h2>                                                                                                                                                       
+                                                                                                                                                                              
+<p>                                                                                                                                                                           
+    <a asp-action="Create">Create New</a>                                                                                                                                     
+</p> 
+<label>Class</label>
+<select class="selectpicker">
+    <option value=""></option>
+    @foreach (var item in Model) { 
+        <option value="@Html.DisplayFor(modelItem => item.Id)">@Html.DisplayFor(modelItem => item.ClassName)</option>
+    }
+</select>
+<table class="table">                                                                                                                                                         
+    <thead>                                                                                                                                                                   
+        <tr>                                                                                                                                                                  
+                <th>                                                                                                                                                          
+                    @Html.DisplayNameFor(model => model.Id)                                                                                                                   
+                </th>                                                                                                                                                         
+                <th>                                                                                                                                                          
+                    @Html.DisplayNameFor(model => model.ClassName)                                                                                                                 
+                </th>                                                                                                                                                         
+                <th>
+                    @Html.DisplayNameFor(model => model.ClassDescription)
+                </th>
+            <th></th>                                                                                                                                                         
+        </tr>                                                                                                                                                                 
+    </thead>                                                                                                                                                                  
+    <tbody>                                                                                                                                                                   
+@foreach (var item in Model) {                                                                                                                                                
+        <tr>                                                                                                                                                                  
+            <td>                                                                                                                                                              
+                @Html.DisplayFor(modelItem => item.Id)                                                                                                                        
+            </td>                                                                                                                                                             
+            <td>                                                                                                                                                              
+                @Html.DisplayFor(modelItem => item.ClassName)                                                                                                                      
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClassDescription)
+            </td>                                                                                                                                                             
+            <td>                                                                                                                                                              
+                @Html.ActionLink("Edit", "Edit", new { id=item.Id, name=item.ClassName }) |                                                                                        
+                @Html.ActionLink("Details", "Details", new { id=item.Id }) |                                                                                                  
+                @Html.ActionLink("Delete", "Delete", new { id=item.Id })                                                                                                      
+            </td>                                                                                                                                                             
+        </tr>                                                                                                                                                                 
+}                                                                                                                                                                             
+    </tbody>                                                                                                                                                                  
+</table>                                                                                                                                                                      
