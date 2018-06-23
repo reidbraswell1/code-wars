@@ -1,17 +1,50 @@
-@model IEnumerable<CodeWars.Shared.Student>                                                                                                                                        
+@model IEnumerable<CodeWars.Shared.Student>
+@using CodeWars.Shared
+
+<script>
+var selectedResponse=0;
+function selectIndex()
+{
+    var s = document.getElementById("classSelect");
+    classId = s.options[s.selectedIndex].value;
+    className = s.options[s.selectedIndex].text;
+    location.href = "?id=" + classId + "&className=" + className;
+}
+</script>
                                                                                                                                                                               
 @{                                                                                                                                                                            
-    ViewData["Title"] = "Index";                                                                                                                                              
+    ViewData["Title"] = "Student Index";                                                                                                                                              
 }                                                                                                                                                                             
 <style>                                                                                                                                                                       
     tr:nth-child(even) {background: #CCC}                                                                                                                                     
     tr:nth-child(odd) {background: #FFF}                                                                                                                                      
 </style>                                                                                                                                                                      
-<h2>Student Index</h2>                                                                                                                                                       
-                                                                                                                                                                              
+<h2>@ViewData["Title"]</h2>                                                                                                                                                       
 <p>                                                                                                                                                                           
-    <a asp-action="Create">Create New</a>                                                                                                                                     
-</p>                                                                                                                                                                          
+    @if(Model != null)
+    {
+        <a asp-action="Create"  asp-route-id=@ViewBag.DefaultSelect>Create New</a>                                                                                                                                     
+    }
+</p>            
+<label>Enter class to list students from</label>
+<select class="selectpicker" id="classSelect" onchange="selectIndex()">
+    <option value="">Choose a Class</option>
+    @foreach (var item in @ViewData["Classes"] as IEnumerable<Class>) {
+        @if ( item.Id == @ViewBag.DefaultSelect )
+        {
+            <option value=@item.Id selected>@Html.DisplayFor(modelItem => item.ClassName)</option>
+        }
+        else
+        {
+            <option value=@item.Id>@Html.DisplayFor(modelItem => item.ClassName)</option>
+        }
+    }
+</select>
+<br>
+@if(Model == null)
+{
+    return;
+}
 <table class="table">                                                                                                                                                         
     <thead>                                                                                                                                                                   
         <tr>                                                                                                                                                                  
@@ -46,7 +79,7 @@
                 @Html.DisplayFor(modelItem => item.CodeWarsOverallScore)                                                                                                                      
             </td>                                                                                                                                                             
             <td>                                                                                                                                                              
-                @Html.ActionLink("Edit", "Edit", new { id=item.Id, name=item.LastName }) |                                                                                        
+                @Html.ActionLink("Edit", "Edit", new { id=item.Id, lastName=item.LastName, firstName=item.FirstName, codeWarsUserId=item.CodeWarsUserId, classId=item.ClassId, codeWarsApiKey=item.CodeWarsApiKey, codeWarsOverallScore=item.CodeWarsOverallScore }) |                
                 @Html.ActionLink("Details", "Details", new { id=item.Id }) |                                                                                                  
                 @Html.ActionLink("Delete", "Delete", new { id=item.Id })                                                                                                      
             </td>                                                                                                                                                             

@@ -1,0 +1,60 @@
+﻿@model CodeWars.Shared.Student
+
+@{
+    ViewData["Title"] = "Student Details for ";
+}
+
+
+<h2>@ViewData["Title"] <span style="color:blue">`@Html.DisplayFor(model => model.LastName),@Html.DisplayFor(model => model.FirstName)`</span></h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Id)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CodeWarsUserId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CodeWarsUserId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ClassId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ClassId) (@ViewBag.ClassName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CodeWarsApiKey)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CodeWarsApiKey)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CodeWarsOverallScore)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CodeWarsOverallScore)
+        </dd>
+    </dl>
+</div>
+<div>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    <a asp-action="Index">Back to List</a>
+</div>
